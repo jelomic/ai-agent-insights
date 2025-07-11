@@ -228,6 +228,28 @@ export class ConversationStore {
     this.filters.costRange.max = max;
   }
 
+  resetFilters() {
+    this.filters = {
+      dateRange: {
+        start: Date.now() - 30 * 24 * 60 * 60 * 1000, // Last 30 days
+        end: Date.now(), // Today
+      },
+      agent: '',
+      callType: 'all',
+      status: 'all',
+      caller: '',
+      callee: '',
+      durationRange: {
+        min: 0,
+        max: 3600, // 1 hour
+      },
+      costRange: {
+        min: 0,
+        max: 100, // $100
+      },
+    };
+  }
+
   async loadConversations() {
     this.setLoading(true);
     try {
